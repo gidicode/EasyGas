@@ -43,10 +43,11 @@ INSTALLED_APPS = [
     'EasyGas.apps.EasygasConfig',
     'users.apps.UsersConfig',
     'vendors.apps.VendorsConfig',
-
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -140,3 +141,4 @@ AUTH_USER_MODEL = 'users.User'
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+CORS_ALLOW_ALL_ORIGINS = True
