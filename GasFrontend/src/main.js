@@ -5,9 +5,14 @@ import './index.css'
 import './assets/main.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
+import { 
+        faEllipsisVertical, faHouse, faCircleInfo,
+        faMagnifyingGlassLocation, faUserPlus
+    } 
+    from '@fortawesome/free-solid-svg-icons'
 
-library.add(faEllipsisVertical)
+
+library.add(faEllipsisVertical, faHouse, faCircleInfo, faMagnifyingGlassLocation, faUserPlus)
 
 const app = createApp(App)
 
