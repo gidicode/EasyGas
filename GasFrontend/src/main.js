@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -7,16 +8,21 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { 
         faEllipsisVertical, faHouse, faCircleInfo,
-        faMagnifyingGlassLocation, faUserPlus
+        faMagnifyingGlassLocation, faUserPlus, faCircleXmark
     } 
     from '@fortawesome/free-solid-svg-icons'
+import { createPinia } from 'pinia'
 
 
-library.add(faEllipsisVertical, faHouse, faCircleInfo, faMagnifyingGlassLocation, faUserPlus)
+library.add(faEllipsisVertical, faHouse, 
+    faCircleInfo, faMagnifyingGlassLocation, 
+    faUserPlus, faCircleXmark)
 
+const pinia = createPinia()
 const app = createApp(App)
 
 app.use(router)
+app.use(pinia)
 app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.mount('#app')
