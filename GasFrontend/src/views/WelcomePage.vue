@@ -4,7 +4,7 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
     <main >
-        <section class="container bg-[#7000FF] h-screen grid grid-rows-4 grid-flow-col gap-1 justify-items-center">
+        <section class="container-lg bg-[#7000FF] h-screen grid grid-rows-4 grid-flow-col gap-1 justify-items-center">
             <div class="mt-[4rem]">
                 <LocationCircle/>                                
             </div>   
@@ -16,7 +16,7 @@
                     Get Started
                 </p>
             </div>         
-            <div class="">
+            <div>
                 <button 
                 @click="changeSignIn"
                 class="
@@ -26,7 +26,7 @@
                         SignIn
                 </button>
 
-                <aside class="text-center mt-7 text-white ">
+                <aside class="text-center mt-7 text-white" @click="changeSignUp">
                     <p class="text-[11px] italic">Don't have an account yet?</p>
                     <h6 class="underline text-[14px] font-bold">SignUp</h6>
                 </aside>            
@@ -43,6 +43,10 @@
         <section class="absolute top-0 z-50 h-auto" v-if="showSignIn">            
             <SignIn/> 
         </section>
+
+        <section class="absolute top-0 z-50 h-auto" v-if="showSignUp">            
+            <SignUp/> 
+        </section>
     </main>
      
 </template>
@@ -52,12 +56,15 @@ import { computed } from 'vue'
 import LocationCircle from '../components/LocationCircle.vue'
 import MenuItems from '../components/MenuItems.vue'
 import SignIn from '../components/SignIn.vue'
+import SignUp from '../components/SignUp.vue'
 import { useGasStore } from '../store/index'
 
 // eslint-disable-next-line prettier/prettier
 const store = useGasStore()
-const showMenu = computed(()=> store.showMenu) 
+const showMenu = computed(() => store.showMenu)
 const showSignIn = computed(() => store.showSignIn)
+const showSignUp = computed(() => store.showSignUp)
 const changeSignIn = () => store.changeSignin()
+const changeSignUp = () => store.changeSignUp()
 
 </script>

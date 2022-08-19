@@ -22,6 +22,14 @@
                     <span class="mr-1"> <font-awesome-icon icon="fa-solid fa-user-plus" /></span> 
                     SignUp
                 </li>
+                <li class="mb-3"> 
+                    <span class="mr-1"> <font-awesome-icon icon="fa-solid fa-user-plus" /></span> 
+                    SignIn
+                </li>
+                <li class="mb-3"> 
+                    <span class="mr-1"> <font-awesome-icon icon="fa-solid fa-user-plus" /></span> 
+                    Log Out
+                </li>
             </ul>        
         </nav>   
     </div>
