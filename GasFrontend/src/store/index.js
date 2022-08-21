@@ -2,11 +2,12 @@
 import {  ref } from "vue";
 import { defineStore } from 'pinia'
 
+
 export const useGasStore = defineStore('gas', () => {
     const showMenu = ref(false)
     const showSignIn = ref(false)
     const showSignUp = ref(false)
-    const authenticated = ref(false)
+    const authenticated = ref(false)    
 
     function changeMenu(values) {
         showMenu.value = values        
@@ -18,7 +19,7 @@ export const useGasStore = defineStore('gas', () => {
 
     function changeSignUp() {
         showSignUp.value = !showSignUp.value
-    }
+    }    
 
     return { 
         showMenu, 

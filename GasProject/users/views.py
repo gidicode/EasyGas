@@ -1,25 +1,24 @@
 from django.views.decorators.csrf import csrf_exempt
-from .serializers import UsersSerializers
+from .serializers import UsersSerializers, RegisterSerializer
 from .models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import generics
 from django.http import Http404
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import MyTokenObtainPairSerializer
 
 #list all users and create all users
+class MyTokenObtainPairView(TokenObtainPairView):
+    permission_classes = (AllowAny, )
+    serializer_class = MyTokenObtainPairSerializer
 
-class UserList(APIView):
-    def get(self, request, format=None):
-        users = User.objects.all()        
-        serializer = UsersSerializers(users, many=True)
-        return Response(serializer.data)
+class RegisterView(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
 
-    def post(self, request, format=None):
-        serializer = UsersSerializers(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class UserDetail(APIView):
     def get_object(self, pk):
