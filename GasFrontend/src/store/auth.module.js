@@ -5,7 +5,6 @@ import {  ref } from "vue";
 
 const user = JSON.parse(localStorage.getItem('user'))
 
-
 export const useAuthUserStore = defineStore("auth/user", () => {
     const state = ref(user 
         ? {status: {loggedIn: true}, user} : 

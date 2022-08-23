@@ -5,6 +5,7 @@ import UsersDashboard from '../views/UsersDashboard.vue'
 import CompleteRegistration from '../components/CompleteRegistration.vue'
 import RegistrationComplete from '../components/RegistrationComplete.vue'
 import UserDashBoard from '../components/userDashArea/UserDashBoard.vue'
+import Signin from '../components/Signin.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,6 +15,12 @@ const router = createRouter({
       name: 'home',
       component: WelcomePage
     },    
+
+    {
+      path: '/login',
+      name: 'login',
+      component: Signin
+    },
 
     {
       path: '/dashboard',

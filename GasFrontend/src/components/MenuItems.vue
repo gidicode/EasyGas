@@ -1,4 +1,5 @@
 <!-- eslint-disable prettier/prettier -->
+<!-- eslint-disable prettier/prettier -->
 <template>
     <div class="bg-neutral-900/75 relative top-0 h-screen w-screen" @click.self="closeMenu">
         <nav class="absolute right-0 bg-white w-56 h-auto ">      
@@ -25,11 +26,12 @@
                 <li class="mb-3"> 
                     <span class="mr-1"> <font-awesome-icon icon="fa-solid fa-user-plus" /></span> 
                     SignIn
-                </li>
-                <li class="mb-3"> 
+                </li>                
+                <li class="mb-3" @click="logOut"  v-if="logInSate" > 
                     <span class="mr-1"> <font-awesome-icon icon="fa-solid fa-user-plus" /></span> 
                     Log Out
                 </li>
+                <li @click="logOut" v-else> </li>
             </ul>        
         </nav>   
     </div>
@@ -37,7 +39,22 @@
 
 <script setup> 
 import { useGasStore } from '../store'
+import { useAuthUserStore } from '../store/auth.module'
+import { useRouter } from 'vue-router'
+import { computed } from 'vue'
 
 const store = useGasStore()
+const authStore = useAuthUserStore()
+const router = useRouter()
 const closeMenu = () => store.changeMenu(false)
+
+const logOut = async () => {
+    const log = await authStore.logout()
+    router.push('/')
+    store.changeMenu(false)
+    return log
+}
+
+const logInSate = computed(() => authStore.state.status.loggedIn)
+
 </script>

@@ -19,7 +19,6 @@ class RegisterView(generics.ListCreateAPIView):
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
 
-
 class UserDetail(APIView):
     def get_object(self, pk):
         try:
