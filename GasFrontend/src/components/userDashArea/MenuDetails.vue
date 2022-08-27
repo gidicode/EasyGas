@@ -2,7 +2,8 @@
 <template>
     <div class="flex justify-between">
         <div class="">
-            <p class="text-xs text-[#FF00B5]">Welcome {{currentUser.username}}</p>            
+            <p class="text-xs text-[#FF00B5]">Welcome {{ currentUser.username }}</p>            
+            
         </div>        
 
         <div class="w-14">
@@ -23,5 +24,6 @@ import {useAuthUserStore} from '../../store/auth.module'
 import { computed } from 'vue'
 
 const authStore = useAuthUserStore()
+
 const currentUser = computed(() => authStore.state.user)
 </script>

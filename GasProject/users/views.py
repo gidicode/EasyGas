@@ -1,5 +1,5 @@
 from django.views.decorators.csrf import csrf_exempt
-from .serializers import UsersSerializers, RegisterSerializer
+from .serializers import *
 from .models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -7,7 +7,7 @@ from rest_framework import generics
 from django.http import Http404
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import MyTokenObtainPairSerializer
+#from .serializers import MyTokenObtainPairSerializer
 
 #list all users and create all users
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -19,22 +19,20 @@ class RegisterView(generics.ListCreateAPIView):
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
 
-class UserDetail(APIView):
-    def get_object(self, pk):
-        try:
-            return User.objects.get(pk=pk)
-        except User.DoesNotExist:
-            raise Http404
-        
-    def get(self, request, pk, format=None):
-        user = self.get_object(pk)
-        serializer = UsersSerializers(user)
-        return Response(serializer.data)        
+class CompleteUserRegistration(generics.UpdateAPIView):       
+    permission_classes = [IsAuthenticated]
+    serializer_class = CompleteRegistration
 
-    def put(self, request, pk, format = None):
-        user = self.get_object(pk)
-        serializer = UsersSerializers(user, data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    def get_object(self):
+        user = self.request.user
+        print('userrrrrr', user)
+        return User.objects.get(username = user)
+    
+class UserDetail(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated, ]
+    serializer_class = UsersSerializers
+
+    def get_object(self):
+        user = self.request.user
+        print('id:3', user)
+        return User.objects.get(username = user)          

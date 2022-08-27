@@ -13,7 +13,7 @@ class AuthService{
             .then(response => {                
                 if (response.data.access) {
                     const decodedToken = jwt_decode(response.data.access)                    
-                    localStorage.setItem("user", JSON.stringify(decodedToken))
+                    localStorage.setItem("user", JSON.stringify(decodedToken))                    
                     localStorage.setItem('token', JSON.stringify(response.data))
                 }
                 return response.data
@@ -21,8 +21,8 @@ class AuthService{
     }
 
     logout(){
-        localStorage.removeItem("user")
-        localStorage.removeItem("token")
+        localStorage.removeItem("user")        
+        localStorage.removeItem("token")   
   }
 
     register(user) {

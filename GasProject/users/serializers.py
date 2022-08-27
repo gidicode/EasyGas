@@ -12,7 +12,7 @@ class UsersSerializers(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'state', 'lga', 'phoneNumber', 
-            'Address', 'favourite_vendors', 'profile_picture'
+            'Address', 'favourite_vendors', 'profile_picture', 'reg_complete',
         ]
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -32,7 +32,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         required=True,
         validators = [UniqueValidator(queryset=User.objects.all())]
     )
-
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True)
     class Meta:
@@ -49,5 +48,26 @@ class RegisterSerializer(serializers.ModelSerializer):
             email=validated_data['email'],            
         )
         user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+class CompleteRegistration(serializers.ModelSerializer):
+    state = serializers.CharField(required = True)
+    lga = serializers.CharField(required = True)
+    Address = serializers.CharField(required = True)
+    phoneNumber = serializers.CharField(required = True)    
+    class Meta:
+        model = User
+        fields = ('state', 'lga', 'Address', 'phoneNumber', 'reg_complete')
+
+    def create(self, validated_data):
+        id = validated_data['id']
+        user = User.objects.filter(pk = id).update(
+            state = validated_data['state'],
+            lga = validated_data['lga'],
+            Address = validated_data['Address'],
+            phoneNumber = validated_data['phoneNumber'],
+            reg_complete = validated_data['reg_complete']
+        )
         user.save()
         return user

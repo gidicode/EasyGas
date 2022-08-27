@@ -8,7 +8,8 @@ urlpatterns = [
     path('login/', views.MyTokenObtainPairView.as_view(), name = 'token_obtain_pair'),
     path('login/refresh', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', views.RegisterView.as_view(), name='auth_register'),
-    path('users/<int:pk>/', views.UserDetail.as_view())
+    path('users/<int:pk>/', views.UserDetail.as_view()),
+    path('users/<int:pk>/completeRegistration/', views.CompleteUserRegistration.as_view(), name="complet_registration"),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
