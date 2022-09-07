@@ -5,7 +5,11 @@ import UsersDashboard from '../views/UsersDashboard.vue'
 import CompleteRegistration from '../components/CompleteRegistration.vue'
 import RegistrationComplete from '../components/RegistrationComplete.vue'
 import UserDashBoard from '../components/userDashArea/UserDashBoard.vue'
+import UserProfile from '../components/userDashArea/UserProfile.vue'
 import Signin from '../components/Signin.vue'
+import VendorsNearMe from "../components/userDashArea/VendorsNearMe.vue"
+import SearchForFriend from "../components/userDashArea/SearchForFriend.vue"
+import VendorDetails from "../components/userDashArea/VendorDetails.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,6 +40,18 @@ const router = createRouter({
           }, {
             path: 'summary',
             component: UserDashBoard,
+          }, {
+            path: 'user-profile',
+            component: UserProfile
+          }, {
+            path: 'vendors-nearme',
+            component: VendorsNearMe
+          }, {
+            path: 'search-forfriend',
+            component: SearchForFriend
+          }, {
+            path: "vendor-details",
+            component: VendorDetails
           }
       ]
     }

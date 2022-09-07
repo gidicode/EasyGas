@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { 
         faEllipsisVertical, faHouse, faCircleInfo,
         faMagnifyingGlassLocation, faUserPlus, faCircleXmark,
-        faBell, faCircleUser,
+        faBell, faCircleUser, faPenToSquare
     } 
     from '@fortawesome/free-solid-svg-icons'
 import { createPinia } from 'pinia'
@@ -17,7 +17,7 @@ import { createPinia } from 'pinia'
 
 library.add(faEllipsisVertical, faHouse,
     faCircleInfo, faMagnifyingGlassLocation, 
-    faUserPlus, faCircleXmark, faBell, faCircleUser)
+    faUserPlus, faCircleXmark, faBell, faCircleUser, faPenToSquare)
 
 const pinia = createPinia()
 const app = createApp(App)

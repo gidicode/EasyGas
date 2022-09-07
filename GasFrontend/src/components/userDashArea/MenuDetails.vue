@@ -12,7 +12,9 @@
                     <font-awesome-icon icon="fa-solid fa-bell" class="mr-5" />
                 </div>
                 <div class="text-[#CEA8FF] text-base">
+                    <RouterLink to="/dashboard/user-profile">
                     <font-awesome-icon icon="fa-solid fa-circle-user" />
+                    </RouterLink>
                 </div>               
             </div>                        
         </div>
@@ -20,10 +22,11 @@
 </template>
 
 <script setup>
-import {useAuthUserStore} from '../../store/auth.module'
-import { computed } from 'vue'
+import { useAuthUserStore } from "../../store/auth.module";
+import { computed } from "vue";
+import { RouterLink } from "vue-router";
 
-const authStore = useAuthUserStore()
+const authStore = useAuthUserStore();
 
-const currentUser = computed(() => authStore.state.user)
+const currentUser = computed(() => authStore.state.user);
 </script>

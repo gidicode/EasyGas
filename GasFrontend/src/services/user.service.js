@@ -26,6 +26,17 @@ class UserService {
             reg_complete: user.reg_complete
         },
         {headers: authHeader()})
+    };
+
+    userEditProfile(user) {
+        return axios.put(API_URL + 'auth/users/' + this.curentUser() + '/' + 'editUser/', {
+            state: user.state,
+            lga:user.lga,
+            Address: user.address,
+            phoneNumber: user.phoneNumber,
+            profile_picture: user.profile_picture
+        },
+        { headers: authHeader()})
     }
 }
 

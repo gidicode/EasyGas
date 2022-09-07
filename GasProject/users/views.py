@@ -24,8 +24,7 @@ class CompleteUserRegistration(generics.UpdateAPIView):
     serializer_class = CompleteRegistration
 
     def get_object(self):
-        user = self.request.user
-        print('userrrrrr', user)
+        user = self.request.user        
         return User.objects.get(username = user)
     
 class UserDetail(generics.RetrieveAPIView):
@@ -33,6 +32,16 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UsersSerializers
 
     def get_object(self):
-        user = self.request.user
-        print('id:3', user)
+        user = self.request.user        
         return User.objects.get(username = user)          
+
+class EditUser(generics.UpdateAPIView):
+    permission_classes = [ IsAuthenticated ]
+    serializer_class = UsersSerializers
+
+    def get_object(self):
+        user  = self.request.user
+        return User.objects.get(username = user)
+    
+    
+
