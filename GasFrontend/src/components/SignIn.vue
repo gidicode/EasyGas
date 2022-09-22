@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <template>
   <main class="bg-neutral-900/75 relative top-0 h-screen w-screen">
     <section class="grid grid-cols-1 place-items-center">
