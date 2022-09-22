@@ -13,5 +13,4 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import MenuDetails from '../components/userDashArea/MenuDetails.vue'
-
 </script>

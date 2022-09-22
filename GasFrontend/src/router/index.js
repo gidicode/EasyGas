@@ -10,6 +10,7 @@ import Signin from '../components/Signin.vue'
 import VendorsNearMe from "../components/userDashArea/VendorsNearMe.vue"
 import SearchForFriend from "../components/userDashArea/SearchForFriend.vue"
 import VendorDetails from "../components/userDashArea/VendorDetails.vue"
+import GasRequest from "../components/userDashArea/GasRequest.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,6 +53,9 @@ const router = createRouter({
           }, {
             path: "vendor-details",
             component: VendorDetails
+          }, {
+            path: "gas-request",
+            component: GasRequest
           }
       ]
     }

@@ -2,10 +2,11 @@
 <template>
     <main class="mt-8">
         <div class="grid grid-cols-2 gap-4 place-items-center">
+          <RouterLink to="/dashboard/gas-request">
             <section class="rounded-xl bg-[#FFE5F8] w-36 h-20 p-2">
                 <p class="text-xs ml-2 mt-1 font-medium">Gas Request</p>
-            </section>
-
+            </section>            
+          </RouterLink>
             <section class="rounded-xl bg-[#E5D0FF] w-36 h-20 p-2">
                 <p class="text-xs ml-2 mt-1 font-medium">Vendors</p>
             </section>           
@@ -65,6 +66,7 @@ const logOut = async () => {
 
 onMounted(async () => {
   await UserService.curentUser();
+  await store.getCurrentUser() 
 
   UserService.getLogedInUser().then(
     (response) => {
@@ -75,7 +77,6 @@ onMounted(async () => {
       }
     },
     (error) => {
-      console.log(error);
       if (error.response.status == 401) {
         logOut();
       }

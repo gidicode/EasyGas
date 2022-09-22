@@ -2,8 +2,8 @@
 <template>
     <div class="flex justify-between">
         <div class="">
-            <p class="text-xs text-[#FF00B5]">Welcome {{ currentUser.username }}</p>            
-            
+            <p v-if="loading"></p>
+            <p v-else class="text-xs text-[#FF00B5]">Welcome {{ currentUser.username }}</p>                        
         </div>        
 
         <div class="w-14">
@@ -22,11 +22,12 @@
 </template>
 
 <script setup>
-import { useAuthUserStore } from "../../store/auth.module";
+import { useGasStore } from "../../store"
 import { computed } from "vue";
 import { RouterLink } from "vue-router";
 
-const authStore = useAuthUserStore();
-
-const currentUser = computed(() => authStore.state.user);
+const store = useGasStore()
+store.getCurrentUser()
+const currentUser = computed(() => store.currentUserData)
+const loading = computed(()=> store.loading);
 </script>

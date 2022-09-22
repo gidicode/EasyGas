@@ -10,7 +10,9 @@ urlpatterns = [
     path('register/', views.RegisterView.as_view(), name='auth_register'),
     path('users/<int:pk>/', views.UserDetail.as_view()),
     path('users/<int:pk>/completeRegistration/', views.CompleteUserRegistration.as_view(), name="complet_registration"),
-    path('users/<int:pk>/editUser/', views.EditUser.as_view(), name="edit_user")
+    path('users/<int:pk>/editUser/', views.EditUser.as_view(), name="edit_user"),
+    path('users/<int:pk>/changeProfilePicture/', views.ChangeProfilePicture.as_view(), name="change_profile_picture"),
+    path('users/<int:pk>/changePassword/', views.ChangePassword.as_view(), name="change_password")
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

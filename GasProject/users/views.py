@@ -42,6 +42,20 @@ class EditUser(generics.UpdateAPIView):
     def get_object(self):
         user  = self.request.user
         return User.objects.get(username = user)
-    
-    
+
+class ChangeProfilePicture(generics.UpdateAPIView):
+    permission_classes = [ IsAuthenticated, ]
+    serializer_class = ChangeProfilePictures
+
+    def get_object(self):
+        user  = self.request.user
+        return User.objects.get(username = user)
+
+class ChangePassword(generics.UpdateAPIView):
+    permission_classes = [ IsAuthenticated, ]
+    serializer_class = ChangePasswordSerializer
+
+    def get_object(self):
+        user = self.request.user
+        return User.objects.get(username = user)
 
