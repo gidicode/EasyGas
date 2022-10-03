@@ -1,6 +1,3 @@
-from asyncore import write
-import email
-from pyexpat import model
 from rest_framework import serializers
 from .models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -12,12 +9,11 @@ class UsersSerializers(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email', 'state', 'lga', 'phoneNumber', 
-            'Address', 'favourite_vendors', 'profile_picture', 'reg_complete',
+            'Address', 'favourite_vendors', 'profile_picture', 'reg_complete', 'vendor'
         ]
-        read_only_fields = ['username', 'email', 'reg_complete' ]
+        read_only_fields = ['username', 'email', 'reg_complete', 'vendor' ]
 
-    def update(self, instance, validated_data):
-        print(validated_data)
+    def update(self, instance, validated_data):        
         instance.state = validated_data.get('state', instance.state)
         instance.lga = validated_data.get('lga', instance.lga)
         instance.Address = validated_data.get('Address', instance.Address)
@@ -48,7 +44,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'password2', 'email', )
+        fields = ('username', 'password', 'password2', 'email', 'vendor' )
         extra_kwargs = {'password': {'write_only': True}}
 
     def validate(self, attrs):
@@ -56,9 +52,9 @@ class RegisterSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"password": "Password field didin't match."})
         return attrs
 
-    def create(self, validated_data):
+    def create(self, validated_data):        
         user = User.objects.create(username=validated_data['username'],
-            email=validated_data['email'],            
+            email=validated_data['email'], vendor=validated_data['vendor']      
         )
         user.set_password(validated_data['password'])
         user.save()
@@ -88,8 +84,7 @@ class ChangeProfilePictures(serializers.ModelSerializer):
         model = User
         fields = ['profile_picture', ]
 
-    def update(self, instance, validated_data):
-        print(instance, validated_data)
+    def update(self, instance, validated_data):        
         instance.profile_picture = validated_data.get('profile_picture', instance.profile_picture)
         instance.save()
         return instance

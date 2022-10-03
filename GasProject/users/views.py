@@ -1,10 +1,6 @@
-from django.views.decorators.csrf import csrf_exempt
 from .serializers import *
 from .models import User
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import generics
-from django.http import Http404
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
 #from .serializers import MyTokenObtainPairSerializer
