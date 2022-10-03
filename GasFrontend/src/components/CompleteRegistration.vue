@@ -4,7 +4,7 @@
 <template>
     <div class="grid grid-col-2 place-items-center">
         <div class="mt-16">
-            <p class="text-xs font-semibold text-[#3D1174]"> Please Complete your registration to proceed.</p>
+            <p class="text-base font-semibold text-[#3D1174]"> Please Complete your registration to proceed.</p>
         </div>
         <div class="bg-[#FAF5FF] drop-shadow-md rounded w-64 mt-10 p-4">
             <form @submit.prevent="completeUserReg" class="grid grid-cols-1 place-items-center">
@@ -111,10 +111,10 @@ const { value: phone_number } = useField("phone_number");
 const Submitting = ref(false);
 const showError500 = ref(false)
 const logOut = async () => {
-    const log = await authStore.logout()
-    router.push('/login')
-    store.changeMenu(false)
-    return log
+  const log = await authStore.logout();
+  router.push('/login')
+  store.changeMenu(false)
+  return log
 }
 
 const completeUserReg = handleSubmit(() => {

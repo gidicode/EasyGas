@@ -3,7 +3,9 @@
 <template>
     <div>
         <header class="flex justify-between mt-5">
-            <div> <p class="text-black">hello</p></div>
+            <div>
+                <history-back/>
+            </div>
             <div> 
                 <p class="text-black" @click="clickEdit">
                     <font-awesome-icon icon="fa-solid fa-pen-to-square" />
@@ -18,7 +20,9 @@
                     <div v-if="changeProfileState" class="mt-3">
                       <ChangeProfilePicture/>
                     </div>
-                  <p @click="changeProfile" class="mt-5 text-sm text-[#D9BCFF] hover:text-[#3E1177] cursor-pointer">Change Picture</p>                  
+                  <p 
+                    @click="changeProfile" 
+                    class="mt-5 text-sm text-[#D9BCFF] hover:text-[#3E1177] cursor-pointer">Change Picture</p>                  
                 </div>                
                                 
                  <div v-if="edit" class="grid grid-col-1 place-items-center ">                      
@@ -97,13 +101,14 @@
 import { computed, ref } from "vue";
 //import { useAuthUserStore } from "../../store/auth.module";
 import { useGasStore } from "../../store";
-//import { useRouter } from "vue-router";
 import EditProfileForm from "../userDashArea/EditProfileForm.vue";
 import ChangePassword from "../userDashArea/ChangePassword.vue";
 import ChangeProfilePicture from "../userDashArea/ChangeProfilePicture.vue"
+import HistoryBack from "../userDashArea/HistoryBack.vue"
 
 const store = useGasStore();
 store.getCurrentUser()
+
 const userData = computed(() => store.currentUserData);
 const loading = computed(() => store.loading);
 const edit = ref(false);

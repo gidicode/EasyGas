@@ -1,21 +1,27 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
     <main class="mt-8">
-        <div class="grid grid-cols-2 gap-4 place-items-center">
-          <RouterLink to="/dashboard/gas-request">
-            <section class="rounded-xl bg-[#FFE5F8] w-36 h-20 p-2">
-                <p class="text-xs ml-2 mt-1 font-medium">Gas Request</p>
-            </section>            
-          </RouterLink>
-            <section class="rounded-xl bg-[#E5D0FF] w-36 h-20 p-2">
-                <p class="text-xs ml-2 mt-1 font-medium">Vendors</p>
-            </section>           
+        <div class="grid grid-cols-1 md:place-items-center">
+          <section class="flex flex-row justify-between px-3 mt-2 mb-0.5">
+             <router-link to="/dashboard/gas-request">
+              <section class="rounded-xl bg-[#FFE5F8] w-36 mr-4 h-20 p-2">
+                  <p class="text-sm ml-2 mt-1">Gas Request</p>
+              </section>
+            </router-link>
+
+            <router-link to="/dashboard/vendors-list">
+              <section class="rounded-xl bg-[#E5D0FF] w-36 h-20 p-2">
+                  <p class="text-sm ml-2 mt-1">Vendors</p>
+              </section>           
+            </router-link>              
+          </section>                    
         </div>
+
          <hr class="mt-9">
 
          <div class="grid grid-cols-1 place-items-center mt-20">
             <section>        
-              <RouterLink to="/dashboard/vendors-nearme">        
+              <router-link to="/dashboard/vendors-nearme">        
                 <button 
                     class="rounded-xl mb-8 bg-[#D60097] 
                         p-2 w-56 h-11
@@ -24,11 +30,11 @@
                         <font-awesome-icon icon="fa-solid fa-magnifying-glass-location" />
                         Vendor Near Me
                 </button>
-              </RouterLink>
+              </router-link>
             </section>
 
             <section>
-                <RouterLink to="/dashboard/search-forfriend">
+                <router-link to="/dashboard/search-forfriend">
                 <button 
                     class="rounded-xl mb-8 bg-[#A589C9] 
                         p-2 w-56 h-10
@@ -37,13 +43,9 @@
                         <font-awesome-icon icon="fa-solid fa-magnifying-glass-location" />
                         For Friend
                 </button>
-                </RouterLink>
+                </router-link>
             </section>
-         </div>
-
-         <div class="grid grid-cols-1 place-items-center mt-20">            
-            <img src="@/assets/Locate.png" alt="Locate Gas Vendor" class="h-64 w-64 opacity-40">            
-         </div>
+         </div>         
     </main>
 </template>
 
@@ -66,14 +68,19 @@ const logOut = async () => {
 
 onMounted(async () => {
   await UserService.curentUser();
-  await store.getCurrentUser() 
+  store.getCurrentUser() 
 
   UserService.getLogedInUser().then(
     (response) => {
       if (response.data.reg_complete == false) {
         router.push("/dashboard/complete-registration");
-      } else {
+      } else if (
+        response.data.reg_complete == true &&
+        response.data.vendor == false
+      ) {
         router.push("/dashboard/summary");
+      } else {
+        router.push("/dashboard/vendor-summary")
       }
     },
     (error) => {

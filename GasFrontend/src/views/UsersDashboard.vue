@@ -1,6 +1,6 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-    <main class="container-lg h-screen w-screen mt-2">
+    <main class="container-lg mt-2">
         <header class="px-8">
            <MenuDetails/>
         </header>

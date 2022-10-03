@@ -1,18 +1,13 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-  <main class="bg-neutral-900/75 relative top-0 h-screen w-screen">
-    <section class="grid grid-cols-1 place-items-center">
-      <div class="relative top-36" @click="closeSignIn">
-        <font-awesome-icon
-          class="text-white text-3xl"
-          icon="fa-solid fa-circle-xmark"
-        />
-      </div>
-      <div class="bg-white rounded-xl w-80 p-4 mt-60">
+  <main class="">
+    <section class="grid grid-cols-1 place-items-center">     
+      <div class="bg-white rounded-xl w-auto px-8 shadow-lg mt-20">
         <form
           @submit.prevent="logInUser"
-          class="grid grid-cols-1 place-items-center"
+          class="grid grid-cols-1 place-items-center "
         >
+          <h5 class="font-medium mb-5 mt-2 text-[#FF00B5] text-2xl">LOGIN</h5>
           <p class="text-xs text-rose-400 text-center w-64" v-if="showInvalid">
             {{ invalidCredentials }}
           </p>
@@ -28,7 +23,7 @@
               id="email"
               required
               name="Email"
-              class="w-64 border-b-2 border-[#9062CB]"
+              class="w-64 border-b-2 border-[#9062CB] focus:outline-none"
             />
             <p class="text-xs text-rose-500 w-64">{{ errors.email }}</p>
           </div>
@@ -44,8 +39,9 @@
               type="password"
               id="password"
               name="Password"
+              required
               v-model="password"
-              class="w-64 border-b-2 border-[#9062CB] focus:outline-none e focus:ring focus:border-blue-500"
+              class="w-64 border-b-2 border-[#9062CB] focus:outline-none"
             />
             <p class="text-xs text-rose-500 w-64">{{ errors.password }}</p>
           </div>
@@ -105,7 +101,7 @@ const { errors, handleSubmit } = useForm({
 const { value: email } = useField("email");
 const { value: password } = useField("password")
 
-const closeSignIn = () => store.changeSignin()
+//const closeSignIn = () => store.changeSignin()
 
 const invalidCredentials = ref("");
 const showInvalid = ref(false);
@@ -132,3 +128,18 @@ const logInUser = handleSubmit(() => {
   );
 });
 </script>
+
+<style scoped>
+::placeholder {
+  color: #dec5fd;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: #dec5fd;
+}
+
+::-ms-input-placeholder {
+  color: #dec5fd;
+}
+</style>

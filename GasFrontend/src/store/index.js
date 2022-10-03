@@ -7,25 +7,26 @@ import { useRouter } from "vue-router";
 
 export const useGasStore = defineStore('gas', () => {
     const showMenu = ref(false)
-    const showSignIn = ref(false)
-    const showSignUp = ref(false) 
+    //const showSignIn = ref(false)
+    //onst showSignUp = ref(false) 
     const currentUserData = ref(null)
     const responseError = ref(null)
     const loading = ref(false)
     const authStore = useAuthUserStore()
     const router = useRouter()
+    const accountType = ref(null)
 
     function changeMenu(values) {
         showMenu.value = values        
     }
 
-    function changeSignin() {
+    /*function changeSignin() {
         showSignIn.value = !showSignIn.value        
     }
 
     function changeSignUp() {
         return showSignUp.value = !showSignUp.value
-    }    
+    } */   
 
     function getCurrentUser(){
         loading.value = true
@@ -54,13 +55,14 @@ export const useGasStore = defineStore('gas', () => {
     return { 
         showMenu, 
         changeMenu, 
-        changeSignin, 
-        showSignIn,
-        changeSignUp,
-        showSignUp,
+        //changeSignin, 
+        //howSignIn,
+        //changeSignUp,
+        //showSignUp,
         getCurrentUser,
         currentUserData,
         loading,
-        logoutUser              
+        logoutUser,
+        accountType              
     }
 })

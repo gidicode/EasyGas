@@ -6,11 +6,13 @@ import CompleteRegistration from '../components/CompleteRegistration.vue'
 import RegistrationComplete from '../components/RegistrationComplete.vue'
 import UserDashBoard from '../components/userDashArea/UserDashBoard.vue'
 import UserProfile from '../components/userDashArea/UserProfile.vue'
-import Signin from '../components/Signin.vue'
+import Signin from '../components/SignIn.vue'
+import SignUp from "../components/SignUp.vue"
 import VendorsNearMe from "../components/userDashArea/VendorsNearMe.vue"
 import SearchForFriend from "../components/userDashArea/SearchForFriend.vue"
 import VendorDetails from "../components/userDashArea/VendorDetails.vue"
 import GasRequest from "../components/userDashArea/GasRequest.vue"
+import VendorsList from "../components/userDashArea/VendorsList.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,7 +28,11 @@ const router = createRouter({
       name: 'login',
       component: Signin
     },
-
+    {
+      path: '/signUp',
+      name: 'signUp',
+      component: SignUp
+    },
     {
       path: '/dashboard',
       name: 'user-dashboard',
@@ -56,6 +62,10 @@ const router = createRouter({
           }, {
             path: "gas-request",
             component: GasRequest
+          },
+          {
+            path:"vendors-list",
+            component: VendorsList
           }
       ]
     }

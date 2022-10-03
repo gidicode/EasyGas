@@ -1,20 +1,16 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-    <main class="bg-neutral-900/75 relative top-0 h-screen w-screen">
-        <section class="grid grid-cols-1 place-items-center">
-            <div class="relative top-24" @click="closeSignUp">
-                <font-awesome-icon class="text-white text-3xl" icon="fa-solid fa-circle-xmark" />
-            </div>    
-
-            <div class="bg-white rounded-xl w-80 p-4 mt-52">
+    <main>
+        <section class="grid grid-cols-1 place-items-center">             
+            <div class="bg-white rounded-xl w-auto px-8 mt-20 shadow-md">
                 <form action="" class="grid grid-cols-1 place-items-center">
-                    <h5 class="font-medium mb-5 mt-2 text-[#FF00B5] text-2xl">SIGNUP</h5>
+                    <h5 class="font-medium mb-5 mt-2 text-[#FF00B5] text-2xl">  {{accountType}} SIGNUP </h5>
                     <div class="mt-4">                    
                         <input 
                             v-model="username"
                             type="text" id="username" 
                             name="usename" placeholder="Username"
-                            class="w-64 h-10 border border-[#5400C0] p-2">
+                            class="w-64 h-10 border border-[#5400C0] p-2 focus:outline-none">
                         <p class="text-xs text-rose-500 w-64"> {{ errors.username}}</p>
                     </div>
 
@@ -23,7 +19,7 @@
                             v-model="email"
                             type="email" id="email" 
                             name="email" placeholder="Email"
-                            class="w-64 h-10 border border-[#5400C0] p-2">
+                            class="w-64 h-10 border border-[#5400C0] p-2 focus:outline-none">
                         <p class="text-xs text-rose-500 w-64"> {{ errors.email}}</p>
                     </div>
 
@@ -32,7 +28,7 @@
                             v-model="password"
                             type="password" id="password" 
                             placeholder="Password" name="password" 
-                            class="w-64 h-10 border border-[#5400C0] p-2">
+                            class="w-64 h-10 border border-[#5400C0] p-2 focus:outline-none">
                         <p class="text-xs text-rose-500 w-64"> {{errors.password}}</p>
                     </div>
 
@@ -41,7 +37,7 @@
                             v-model="password2"
                             type="password" id="password2" 
                             name="Password2" placeholder="Confirm Password" 
-                            class="w-64 h-10 border border-[#5400C0] p-2">
+                            class="w-64 h-10 border border-[#5400C0] p-2 focus:outline-none">
                         <p class="text-xs text-rose-500 w-64"> {{ errors.password2}}</p>                            
                     </div>
 
@@ -58,7 +54,7 @@
                         
                         <button 
                             v-else
-                            @click.prevent="registerUser"
+                            @click.prevent="selectRegType"
                             class="rounded-xl mb-8 bg-[#8157B6] 
                                 p-2 w-36 h-10
                                 text-white text-base 
@@ -73,12 +69,12 @@
 </template>
 
 <script setup>
-import { useGasStore } from "../store";
 import { useAuthUserStore } from "../store/auth.module";
 import { useRouter } from "vue-router";
 import { computed, onMounted } from "vue";
 import { useForm, useField } from "vee-validate";
 import * as yup from "yup";
+import { useGasStore } from '../store'
 
 onMounted(() => {
   if (loggedInStatus.value) {
@@ -86,11 +82,11 @@ onMounted(() => {
   }
 });
 
-const authStore = useAuthUserStore();
-const store = useGasStore();
+const store = useGasStore()
+const authStore = useAuthUserStore();;
 const router = useRouter();
-const closeSignUp = () => store.changeSignUp();
 const loggedInStatus = computed(() => authStore.state.status.loggedIn);
+const accountType = computed(()=> store.accountType)
 
 const schema = yup.object({
   username: yup.string().required(),
@@ -108,6 +104,14 @@ const { value: username } = useField("username");
 const { value: password } = useField("password");
 const { value: password2 } = useField("password2");
 
+const selectRegType = () => {
+  if(accountType.value == "USER") {
+    registerUser()
+  } else{
+    registerVendor()
+  }
+}
+
 const registerUser = handleSubmit(() => {
   authStore
     .register({
@@ -115,6 +119,36 @@ const registerUser = handleSubmit(() => {
       email: email.value,
       password: password.value,
       password2: password2.value,
+      vendor: false,
+    })
+    .then(
+      () => {
+        router.push("/login");
+      },
+      (error) => {
+        if (error.response.data.email) {
+          setFieldError("email", "This email already exist");
+        }
+
+        if (error.response.data.username) {
+          setFieldError("username", "This username is not available");
+        }
+
+        if (error.response.data.password) {
+          setFieldError("password", error.response.data.password);
+        }
+      }
+    );
+});
+
+const registerVendor = handleSubmit(() => {
+  authStore
+    .register({
+      username: username.value,
+      email: email.value,
+      password: password.value,
+      password2: password2.value,
+      vendor: true,
     })
     .then(
       () => {

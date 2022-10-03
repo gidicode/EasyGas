@@ -30,7 +30,8 @@ class AuthService{
             username: user.username,
             email: user.email,
             password: user.password,
-            password2: user.password2
+            password2: user.password2,
+            vendor: user.vendor
         })
     }
 }

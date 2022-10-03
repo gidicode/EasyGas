@@ -1,10 +1,9 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-    <div class="bg-neutral-900/75 relative top-0 h-screen w-screen">
-        <section  class="grid grid-cols-1 place-items-center">
-            <div class="bg-white rounded-xl w-1/4 p-4 mt-40">
-                <p class="text-sm ml-5 mt-3 mb-6"> 12-05-2022 | 12:00AM</p>
-                
+    <div class="bg-neutral-900/75 relative top-0 w-screen" >    
+        <section  class="grid grid-cols-1 place-items-center" @click.self="$emit('hideGasRequestDetail')">
+            <div class="bg-white rounded-xl w-1/4 p-4 mt-10 mb-10">
+                <p class="text-sm font-bold ml-5 mt-3 mb-6"> 12-05-2022 | 12:00AM</p>                
                 <table class="table-auto w-full text-sm text-left text-black">                   
                     <tbody>
                         <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
@@ -40,29 +39,41 @@
                     </tbody>
                 </table>
                 
-                <p class="text-[#430493] text-sm ml-5 mt-10">Choose Action</p>
-                <div class="flex mt-5 ml-5 text-sm text-white font-semi-bold mb-10">
+                <p class="text-[#430493] text-sm mt-10">Choose Action</p>
+                <div class="flex mt-5 text-sm text-white font-semi-bold mb-10">
                     <div class="flex-1 w-32">
-                        <button class="rounded bg-[#EA91D0] p-2 w-24">
+                        <button class="rounded bg-[#EA91D0] p-2 w-24" @click="UpdateActionType('Rate')">
                             Rate
                         </button>
                     </div>
                     <div class="flex-1 w-32">
-                        <button class="rounded bg-[#EA91D0] p-2 w-24">
+                        <button class="rounded bg-[#EA91D0] p-2 w-24" @click="UpdateActionType('Favourite')">
                             Favourite
                         </button>
                     </div>
                     <div class="flex-1 w-32">
-                        <button class="rounded bg-[#EA91D0] p-2 w-24">
+                        <button class="rounded bg-[#EA91D0] p-2 w-24" @click="UpdateActionType('Comment')">
                             Comment
                         </button>
                     </div>
-                </div>
-
+                </div>                
                 <div>
-                    
+                    <action-page :actionType="actionType"/>
                 </div>
             </div>            
         </section>    
     </div>
 </template>
+
+<script setup>
+import ActionPage from "../userDashArea/ActionPage.vue";
+import { ref } from "vue";
+
+const actionType = ref("");
+
+const UpdateActionType = (value) => {
+  actionType.value = value;
+};
+
+
+</script>

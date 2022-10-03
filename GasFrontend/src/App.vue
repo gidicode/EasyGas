@@ -7,9 +7,7 @@
         </div>
         
         <div class="text-white space-x-0.5 mt-4" @click="openMenu">
-          <font-awesome-icon icon="fa-solid fa-ellipsis-vertical" />
-          <font-awesome-icon icon="fa-solid fa-ellipsis-vertical"/>
-          <font-awesome-icon icon="fa-solid fa-ellipsis-vertical"/>
+          <font-awesome-icon icon="fa-solid fa-bars" />
         </div>
       </nav>
     </header>
