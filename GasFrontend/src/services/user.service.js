@@ -16,7 +16,7 @@ class UserService {
         return axios.get(API_URL + this.curentUser() + '/', {headers: authHeader()})
     };
 
-    completeRegistration(user) {        
+    completeRegistration(user) {                
         return axios.put(API_URL + this.curentUser() + '/' + 'completeRegistration/', 
         { 
             state: user.state,
@@ -54,6 +54,13 @@ class UserService {
             password2: user.password2,
             old_password: user.oldPassword
         }, { headers: authHeader()})
+    };
+
+    updateVendorReg(status) {
+        return axios.put(API_URL + this.curentUser() + '/' + 'updateVendorProfile', {
+            vendor_reg_complete: status.data
+        }, 
+        {headers: authHeader()})
     }
 }
 

@@ -2,7 +2,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import WelcomePage from '../views/WelcomePage.vue'
 import UsersDashboard from '../views/UsersDashboard.vue'
-import CompleteRegistration from '../components/CompleteRegistration.vue'
+import UserCompleteReg from '../components/UserCompleteReg.vue'
+import VendorCompleteReg from '../components/VendorCompleteReg.vue'
 import RegistrationComplete from '../components/RegistrationComplete.vue'
 import UserDashBoard from '../components/userDashArea/UserDashBoard.vue'
 import UserProfile from '../components/userDashArea/UserProfile.vue'
@@ -39,8 +40,11 @@ const router = createRouter({
       component: UsersDashboard,
       children: [
           {
-            path: 'complete-registration',
-            component: CompleteRegistration,
+            path: 'user-complete-registration',
+            component: UserCompleteReg,
+          }, {
+            path: 'vendor-complete-registration',
+            component: VendorCompleteReg,
           }, {
             path: 'registration-complete',
             component: RegistrationComplete,

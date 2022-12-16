@@ -55,3 +55,11 @@ class ChangePassword(generics.UpdateAPIView):
         user = self.request.user
         return User.objects.get(username = user)
 
+class UpdateVendorRegComplete(generics.UpdateAPIView):
+    permission_classes = [IsAuthenticated, ]
+    serializer_class = UpdateVendorRegCompleteSerializer
+
+    def get_object(self):
+        user = self.request.user
+        return User.objects.get(username = user)
+

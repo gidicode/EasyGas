@@ -14,6 +14,7 @@ class User(AbstractUser):
     Address = models.CharField(max_length=200, null=True)
     favourite_vendors = models.ManyToManyField('vendors.Vendors', blank=True)
     reg_complete = models.BooleanField(default=False)
+    vendor_reg_complete = models.BooleanField(default=False)
     profile_picture = models.ImageField(default='default.jpg', upload_to='profile_pics/', null=True)
     date_joined = models.DateTimeField(default=timezone.now)
     vendor = models.BooleanField(default=False)

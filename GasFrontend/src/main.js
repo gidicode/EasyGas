@@ -11,7 +11,8 @@ import {
         faBars, faHouse, faCircleInfo, faMagnifyingGlass,
         faMagnifyingGlassLocation, faUserPlus, faCircleXmark,
         faBell, faCircleUser, faPenToSquare, faCircleCheck,
-        faArrowLeft, faHeartCircleCheck
+        faArrowLeft, faHeartCircleCheck, faAnglesRight, faAnglesLeft,
+        faLocationArrow, faSquarePhone,
     } 
     from '@fortawesome/free-solid-svg-icons'
 import { createPinia } from 'pinia'
@@ -21,7 +22,8 @@ library.add(
         faBars, faHouse, faCircleCheck, faMagnifyingGlass,
         faCircleInfo, faMagnifyingGlassLocation, faArrowLeft,
         faUserPlus, faCircleXmark, faBell, faCircleUser, 
-        faPenToSquare, faHeartCircleCheck,
+        faPenToSquare, faHeartCircleCheck, faAnglesRight, faAnglesLeft,
+        faLocationArrow, faSquarePhone
     )
 
 const pinia = createPinia()

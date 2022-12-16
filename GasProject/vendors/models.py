@@ -15,7 +15,7 @@ class Vendors(models.Model):
     opening_hours = models.TimeField(auto_now=False)
     closing_hours = models.TimeField(auto_now=False)
     verified = models.BooleanField(default=False)
-    company_banner =  models.ImageField(upload_to='profile_pics/', null=True)
+    company_banner =  models.ImageField(default='default.jpg', upload_to='profile_pics/', null=True)
     vendor_profile_completed = models.BooleanField(default=False)
     gas_price = models.DecimalField(max_digits= 5, decimal_places=2)
     description = models.CharField(max_length= 200, null=True)

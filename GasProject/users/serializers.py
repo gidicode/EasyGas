@@ -8,8 +8,10 @@ class UsersSerializers(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'state', 'lga', 'phoneNumber', 
-            'Address', 'favourite_vendors', 'profile_picture', 'reg_complete', 'vendor'
+        fields = [
+            'username', 'email', 'state', 'lga', 'phoneNumber', 
+            'Address', 'favourite_vendors', 'profile_picture', 
+            'reg_complete', 'vendor', "vendor_reg_complete"
         ]
         read_only_fields = ['username', 'email', 'reg_complete', 'vendor' ]
 
@@ -70,12 +72,12 @@ class CompleteRegistration(serializers.ModelSerializer):
         model = User
         fields = ('state', 'lga', 'Address', 'phoneNumber', 'reg_complete')
 
-    def update(self, instance, validated_data):        
+    def update(self, instance, validated_data):                
         instance.state = validated_data.get('email', instance.state)
         instance.lga = validated_data.get('lga', instance.lga)
         instance.Address = validated_data.get('Address', instance.Address)
         instance.phoneNumber = validated_data.get('phonenUmber', instance.phoneNumber)
-        instance.reg_complete = validated_data.get('reg_complete'. instance.reg_complete)
+        instance.reg_complete = validated_data.get('reg_complete', instance.reg_complete)
         instance.save()
         return instance       
 
@@ -97,7 +99,7 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = 'old_password', 'password', 'password2'
+        fields = ['old_password', 'password', 'password2']
 
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:
@@ -112,5 +114,15 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
     
     def update(self, instance, validated_data):
         instance.set_password(validated_data['password'])
+        instance.save()
+        return instance
+
+class UpdateVendorRegCompleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['vendor_reg_complete']
+    
+    def update(self, instance, validated_data):
+        instance.vendor_reg_complete = validated_data.get('vendor_reg_complete', instance.vendor_reg_complete)
         instance.save()
         return instance

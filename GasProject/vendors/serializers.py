@@ -4,10 +4,15 @@ from .models import Vendors
 class VendorsSerializers(serializers.ModelSerializer):
     class Meta:
         model = Vendors
-        fields = '__all__'
+        fields = [
+        'business_name', 'opening_hours', 'closing_hours', 
+        'vendor_profile_completed', 'gas_price', 'description'
+        ]
+        
 
     def create(self, validated_data):
         user = self.context['request'].user
-        vendor = Vendors.objects.create(**validated_data)
-        vendor.save(vendor_profile = user)
+        validated_data["vendor_profile"] = user                
+        vendor = Vendors.objects.create(**validated_data)      
+        vendor.save()
         return vendor

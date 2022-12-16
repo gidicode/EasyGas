@@ -111,10 +111,9 @@ const Submitting = ref(false);
 const logInUser = handleSubmit(() => {
   Submitting.value = true;
   authStore.login({ email: email.value, password: password.value }).then(
-    () => {
-      Submitting.value = false;
+    () => {      
       router.push("/dashboard/summary");
-      store.changeSignin();
+      //store.changeSignin();
       store.changeMenu(false);
     },
     (error) => {

@@ -12,7 +12,8 @@ urlpatterns = [
     path('users/<int:pk>/completeRegistration/', views.CompleteUserRegistration.as_view(), name="complet_registration"),
     path('users/<int:pk>/editUser/', views.EditUser.as_view(), name="edit_user"),
     path('users/<int:pk>/changeProfilePicture/', views.ChangeProfilePicture.as_view(), name="change_profile_picture"),
-    path('users/<int:pk>/changePassword/', views.ChangePassword.as_view(), name="change_password")
+    path('users/<int:pk>/changePassword/', views.ChangePassword.as_view(), name="change_password"),
+    path("users/<int:pk>/updateVendorProfile", views.UpdateVendorRegComplete.as_view(), name = "update_vendor_profile")
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

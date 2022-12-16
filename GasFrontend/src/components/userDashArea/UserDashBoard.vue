@@ -1,7 +1,8 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
     <main class="mt-8">
-        <div class="grid grid-cols-1 md:place-items-center">
+        <div v-if="loading"> loading...</div>
+        <div class="grid grid-cols-1 md:place-items-center" v-else>
           <section class="flex flex-row justify-between px-3 mt-2 mb-0.5">
              <router-link to="/dashboard/gas-request">
               <section class="rounded-xl bg-[#FFE5F8] w-36 mr-4 h-20 p-2">
@@ -11,7 +12,7 @@
 
             <router-link to="/dashboard/vendors-list">
               <section class="rounded-xl bg-[#E5D0FF] w-36 h-20 p-2">
-                  <p class="text-sm ml-2 mt-1">Vendors</p>
+                  <p class="text-sm ml-2 mt-1">Vendors</p>                  
               </section>           
             </router-link>              
           </section>                    
@@ -50,44 +51,35 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-import UserService from "../../services/user.service";
-import { useAuthUserStore } from "../../store/auth.module";
+import { computed, watch } from "vue";
 import { useGasStore } from "../../store";
 import { useRouter, RouterLink } from "vue-router";
+import { storeToRefs } from 'pinia'
 
 const router = useRouter();
-const authStore = useAuthUserStore();
 const store = useGasStore();
-const logOut = async () => {
-  const log = await authStore.logout();
-  router.push("/login");
-  store.changeMenu(false);
-  return log;
-};
+const { loading } = storeToRefs(store)
 
-onMounted(async () => {
-  await UserService.curentUser();
-  store.getCurrentUser() 
-
-  UserService.getLogedInUser().then(
-    (response) => {
-      if (response.data.reg_complete == false) {
-        router.push("/dashboard/complete-registration");
-      } else if (
-        response.data.reg_complete == true &&
-        response.data.vendor == false
-      ) {
-        router.push("/dashboard/summary");
-      } else {
-        router.push("/dashboard/vendor-summary")
-      }
-    },
-    (error) => {
-      if (error.response.status == 401) {
-        logOut();
-      }
+watch(loading, (value) => {
+    if (!value) {
+      checkUserStatus()
     }
-  );
 });
+
+function checkUserStatus(){
+  const currentUser = computed(() => store.currentUserData);  
+  //user not registered
+  if (!currentUser.value.reg_complete) {
+    router.push("/dashboard/user-complete-registration");
+    //user registered and user is vendor but not registered
+  } else if (
+    currentUser.value.reg_complete &&
+    currentUser.value.vendor && 
+    !currentUser.value.vendor_reg_complete
+  ) {
+    router.push("/dashboard/vendor-complete-registration");
+  } else {
+    router.push("/dashboard/summary");
+  }
+}
 </script>
